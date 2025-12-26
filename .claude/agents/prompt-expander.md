@@ -54,18 +54,6 @@ Transform vague prompts into precise, actionable instructions using the PRECISE 
    - If **Save**: Ask for a filename, then Write to `.prompts/[filename].md`
    - If **Refine**: Ask what to change, then re-apply PRECISE with the feedback
 
-## Output Format
-
-```
-## Coggle!
-
-**Original:** > [input]
-**Platform:** [detected]
-
----
-
-**Expanded:**
-[The full expanded prompt]
-```
+**Output Format:** See the Skill's output specification (## Coggle! structure).
 
 The skill `.claude/skills/prompt-expander/SKILL.md` contains the complete PRECISE framework, platform templates, and quality checklist.
