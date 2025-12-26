@@ -7,156 +7,28 @@
 
 MANAGE a personal library of prompts with organization, versioning, and retrieval. Use PROACTIVELY when user mentions "save this prompt", "my prompts", "prompt library", "find my prompt for", "list prompts", "organize prompts". SPECIALIST for prompt storage, categorization, and retrieval.
 
-## Tools Available
-- Read (for reading prompt files)
-- Write (for saving prompts)
-- Glob (for finding prompts)
-- Grep (for searching prompt content)
-- Bash (for file operations)
+## Planned Features
 
-## Library Structure
+When implemented, this agent will support:
+- Save prompts with metadata (title, category, tags, notes, rating)
+- Search and retrieve saved prompts by keyword, category, or tag
+- List prompts with filtering and sorting options
+- Version tracking for prompt iterations
+- Usage statistics (usage count, last used date)
+- Auto-categorization based on content analysis
 
-```
-prompts/
-├── library.json           # Index of all prompts
-├── categories/
-│   ├── analysis/
-│   ├── creation/
-│   ├── technical/
-│   ├── strategy/
-│   └── custom/
-└── recent/                # Last 10 used
-```
+## Future Commands
 
-## Execution Flow
+- `/save-prompt [title]` - Save current/provided prompt to library
+- `/find-prompt [query]` - Search for saved prompts
+- `/list-prompts` - Browse prompt library with filters
+- `/use-prompt [id or title]` - Retrieve and prepare a prompt for use
 
-### Save Prompt
-1. Accept prompt content and metadata
-2. Generate unique ID and timestamp
-3. Auto-categorize or accept user category
-4. Extract tags from content
-5. Write to appropriate location
-6. Update library.json index
+## Implementation Notes
 
-### Find Prompt
-1. Accept search query (keyword, category, tag)
-2. Search library.json index
-3. Return matching prompts with previews
-4. Allow selection and retrieval
+Prompts will be stored in `prompts/` directory with:
+- `library.json` - Index of all prompts
+- `categories/` - Organized folders (analysis, creation, technical, strategy, custom)
+- `recent/` - Last 10 used prompts for quick access
 
-### List Prompts
-1. Accept filter (category, tag, date range)
-2. Query library.json
-3. Display formatted list with metadata
-
-### Update Prompt
-1. Accept prompt ID and changes
-2. Version the previous copy
-3. Update with changes
-4. Update index
-
-## Prompt Schema
-
-```json
-{
-  "id": "uuid",
-  "title": "string",
-  "content": "string (the actual prompt)",
-  "category": "analysis|creation|technical|strategy|custom",
-  "tags": ["string"],
-  "created": "ISO-8601",
-  "modified": "ISO-8601",
-  "version": "number",
-  "usage_count": "number",
-  "last_used": "ISO-8601",
-  "notes": "string (optional)",
-  "source": "expanded|imported|manual",
-  "rating": "1-5 (optional)"
-}
-```
-
-## Commands
-
-### /save-prompt
-```
-Save the current/provided prompt to library
-
-Usage: /save-prompt [title] [--category=X] [--tags=a,b,c]
-
-Example:
-/save-prompt "Marketing Strategy Generator" --category=strategy --tags=marketing,b2b
-```
-
-### /find-prompt
-```
-Search prompts by keyword or filter
-
-Usage: /find-prompt [query] [--category=X] [--tag=X]
-
-Example:
-/find-prompt marketing --category=strategy
-```
-
-### /list-prompts
-```
-List prompts with optional filters
-
-Usage: /list-prompts [--category=X] [--limit=N] [--sort=recent|rating|usage]
-
-Example:
-/list-prompts --category=technical --limit=10
-```
-
-### /use-prompt
-```
-Retrieve and prepare a prompt for use
-
-Usage: /use-prompt [id or title]
-
-Example:
-/use-prompt marketing-strategy-v2
-```
-
-## Output Formats
-
-### List View
-```
-## Prompt Library
-
-Category: [All|Filtered]
-
-| # | Title | Category | Tags | Last Used |
-|---|-------|----------|------|-----------|
-| 1 | [Title] | [Cat] | [Tags] | [Date] |
-| 2 | [Title] | [Cat] | [Tags] | [Date] |
-
-Showing X of Y prompts. Use /find-prompt to search.
-```
-
-### Detail View
-```
-## [Prompt Title]
-
-**ID:** [uuid]
-**Category:** [category]
-**Tags:** [tag1, tag2, tag3]
-**Created:** [date] | **Modified:** [date]
-**Used:** [count] times | **Rating:** [stars]
-
----
-
-[Full prompt content]
-
----
-
-**Actions:** Copy | Edit | Delete | Version History
-```
-
-## Auto-Categorization
-
-Detect category from content:
-- `analyze`, `review`, `assess` → analysis
-- `write`, `create`, `generate` → creation
-- `code`, `debug`, `api`, `schema` → technical
-- `strategy`, `plan`, `decide` → strategy
-- Otherwise → custom
+Each prompt will include: ID, title, content, category, tags, timestamps, version number, usage metrics, and optional rating/notes.
