@@ -1,5 +1,10 @@
 # Agent: prompt-library
 
+> ⚠️ **Status: Specification Only**
+>
+> This agent describes planned functionality that is not yet implemented.
+> The specification below outlines the intended behavior for future development.
+
 MANAGE a personal library of prompts with organization, versioning, and retrieval. Use PROACTIVELY when user mentions "save this prompt", "my prompts", "prompt library", "find my prompt for", "list prompts", "organize prompts". SPECIALIST for prompt storage, categorization, and retrieval.
 
 ## Tools Available
