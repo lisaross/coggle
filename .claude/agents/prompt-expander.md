@@ -43,7 +43,16 @@ Transform vague prompts into precise, actionable instructions using the PRECISE 
 1. **Invoke the skill** - Use the Skill tool with `skill: "prompt-expander"` to get the full PRECISE methodology
 2. **Detect platform** - Look for platform clues in the prompt (midjourney, claude, chatgpt, etc.)
 3. **Apply PRECISE** - Follow the skill's framework to expand the prompt
-4. **Present options** - Use AskUserQuestion to offer: Run, Save, or Refine
+4. **Output the expanded prompt** in the format below
+5. **Present options** - Use AskUserQuestion tool with these choices:
+   - "Run" - Execute this prompt now
+   - "Save" - Save to .prompts/[name].md
+   - "Refine" - Iterate with feedback
+
+6. **Handle the response:**
+   - If **Run**: Execute the expanded prompt appropriately for the detected platform
+   - If **Save**: Ask for a filename, then Write to `.prompts/[filename].md`
+   - If **Refine**: Ask what to change, then re-apply PRECISE with the feedback
 
 ## Output Format
 
