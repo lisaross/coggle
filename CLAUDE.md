@@ -18,7 +18,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
     └── prompt-expander/
         ├── SKILL.md          # PRECISE methodology + platform adaptation
         └── templates/        # Platform-specific prompt patterns
-            ├── README.md
             ├── claude.md
             ├── codex.md
             ├── gemini.md
@@ -32,17 +31,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### PRECISE Framework
 
-Quick reference for the expansion methodology (full details in `.claude/skills/prompt-expander/SKILL.md`):
+> **Full methodology**: See `.claude/skills/prompt-expander/SKILL.md` for complete PRECISE framework documentation.
 
-| Element | Description | Example |
-|---------|-------------|---------|
-| **P**ersona | Define AI role/expertise | "Act as a senior marketing strategist..." |
-| **R**equirements | Specify deliverables | "Provide 3 strategies with ROI estimates" |
-| **E**xamples | Include references | "Like this example: [sample]" |
-| **C**ontext | Add background | "For a B2B SaaS startup targeting..." |
-| **I**nstructions | Numbered steps | "1. Analyze market 2. Identify gaps 3. Recommend approach" |
-| **S**pecifications | Format requirements | "Output as markdown table with headers" |
-| **E**valuation | Success criteria | "Success = actionable within 24 hours" |
+Quick mnemonic: **P**ersona, **R**equirements, **E**xamples, **C**ontext, **I**nstructions, **S**pecifications, **E**valuation
 
 ## Quick Start
 
@@ -52,13 +43,10 @@ Quick reference for the expansion methodology (full details in `.claude/skills/p
 ```
 
 ### Supported Platforms
-| Platform | Examples |
-|----------|----------|
-| Claude/Claude Code | System prompts, agent instructions |
-| OpenAI/GPT/Codex | ChatGPT prompts, code generation |
-| Google Gemini | Multimodal prompts, reasoning tasks |
-| Image Gen | Midjourney, DALL-E, Nano Banana Pro |
-| Video Gen | Sora, Runway, Kling |
+
+> **Detection rules**: See `.claude/skills/prompt-expander/SKILL.md` for platform detection table.
+
+Supports: Claude/Claude Code, OpenAI/GPT/Codex, Google Gemini, Image Gen (Midjourney, DALL-E), Video Gen (Sora, Runway, Kling)
 
 ### After Expansion
 Interactive options:
@@ -116,18 +104,9 @@ description: VERB description with trigger phrases...
 
 ## Anti-Patterns to Avoid
 
-When expanding prompts, watch for and fix:
+> **Full list**: See `.claude/skills/prompt-expander/SKILL.md` quality checklist.
 
-| Anti-Pattern | Example | Fix |
-|--------------|---------|-----|
-| Vague verbs | "help", "something", "stuff" | Specific actions |
-| Missing audience | No target reader defined | Add audience context |
-| Implicit assumptions | Unstated requirements | Make explicit |
-| Wall of text | No structure | Add sections/steps |
-| Conflicting instructions | Contradictory asks | Resolve conflicts |
-| Scope creep | Too many tasks | Split into focused prompts |
-| Missing format | No output spec | Define structure |
-| Role ambiguity | Unclear AI persona | Add specific role |
+Watch for: vague verbs, missing audience, implicit assumptions, wall of text, conflicting instructions, scope creep, missing format, role ambiguity.
 
 ## File Locations
 
@@ -139,3 +118,5 @@ When expanding prompts, watch for and fix:
 | Templates | `.claude/skills/prompt-expander/templates/` | `[platform].md` |
 | Saved Prompts | `.prompts/` | `[name].md` |
 | Project docs | Root | `CLAUDE.md` |
+
+> **Note**: The `.prompts/` directory is auto-created when first saving a prompt via `/coggle`.
