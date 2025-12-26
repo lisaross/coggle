@@ -46,40 +46,19 @@ Identify learning goal:
 Core concepts every prompter needs:
 
 #### 1. The PRECISE Framework
-- **P**ersona: Define AI role/expertise
-  - When: Generic outputs need specialization
-  - How: "Act as a [specific role] with expertise in [domain]..."
-  - Example: "Act as a senior marketing strategist with 10 years in B2B SaaS"
 
-- **R**equirements: Specify deliverables
-  - When: You need specific outputs
-  - How: Be explicit about what you want
-  - Example: "Provide 3 strategies with ROI estimates and implementation timelines"
+The PRECISE methodology is the core prompt expansion framework. For complete details, see the `prompt-expander` skill.
 
-- **E**xamples: Include references
-  - When: Style or format is important
-  - How: Show concrete instances of desired output
-  - Example: "Like this example: [sample], maintain similar structure"
+**Quick Reference:**
+- **P**ersona - Define AI role/expertise
+- **R**equirements - Specify deliverables
+- **E**xamples - Include references
+- **C**ontext - Add background
+- **I**nstructions - Numbered steps
+- **S**pecifications - Format requirements
+- **E**valuation - Success criteria
 
-- **C**ontext: Add background
-  - When: AI needs domain knowledge
-  - How: Provide relevant information
-  - Example: "For a B2B SaaS startup targeting enterprise clients in healthcare"
-
-- **I**nstructions: Numbered steps
-  - When: Process matters
-  - How: Break down the workflow
-  - Example: "1. Analyze market 2. Identify gaps 3. Recommend approach"
-
-- **S**pecifications: Format requirements
-  - When: Output structure is critical
-  - How: Define exact format
-  - Example: "Output as markdown table with headers: Strategy | ROI | Timeline"
-
-- **E**valuation: Success criteria
-  - When: Quality matters
-  - How: Define what "good" looks like
-  - Example: "Success = actionable within 24 hours with no additional research needed"
+→ See `.claude/skills/prompt-expander/SKILL.md` for full methodology and examples.
 
 #### 2. Common Anti-Patterns
 
