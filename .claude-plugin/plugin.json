@@ -1,0 +1,21 @@
+{
+  "name": "coggle",
+  "version": "1.0.0",
+  "description": "Transform vague AI prompts into precise, platform-optimized instructions using the PRECISE methodology",
+  "author": {
+    "name": "Lisa Ross",
+    "email": "lisa@makably.com"
+  },
+  "repository": "https://github.com/makably/coggle",
+  "license": "MIT",
+  "keywords": [
+    "prompt-engineering",
+    "prompt-expansion",
+    "ai-prompts",
+    "midjourney",
+    "chatgpt",
+    "claude",
+    "gemini",
+    "productivity"
+  ]
+}

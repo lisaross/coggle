@@ -4,25 +4,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Coggle** is a Claude Code plugin for prompt enhancement that transforms vague AI prompts into precise, actionable instructions. It provides a local, extensible toolset using Claude Code's agent/skill/command architecture.
+**Coggle** is a Claude Code marketplace plugin for prompt enhancement that transforms vague AI prompts into precise, actionable instructions. It provides a local, extensible toolset using Claude Code's agent/skill/command architecture.
 
 ## Architecture
 
 ```
-.claude/
+coggle/
+├── .claude-plugin/
+│   └── plugin.json              # Plugin manifest
 ├── agents/
-│   └── prompt-expander.md    # Expands prompts with platform detection
+│   └── prompt-expander.md       # Expands prompts with platform detection
 ├── commands/
-│   └── coggle.md             # /coggle - Main entry point
-└── skills/
-    └── prompt-expander/
-        ├── SKILL.md          # PRECISE methodology + platform adaptation
-        └── templates/        # Platform-specific prompt patterns
-            ├── claude.md
-            ├── codex.md
-            ├── gemini.md
-            ├── image-gen.md
-            └── video-gen.md
+│   └── coggle.md                # /coggle - Main entry point
+├── skills/
+│   └── prompt-expander/
+│       ├── SKILL.md             # PRECISE methodology + platform adaptation
+│       └── templates/           # Platform-specific prompt patterns
+│           ├── claude.md
+│           ├── codex.md
+│           ├── gemini.md
+│           ├── image-gen.md
+│           └── video-gen.md
+├── README.md                    # Plugin documentation
+└── CLAUDE.md                    # Development guidance (this file)
 ```
 
 ## Core Concepts
@@ -31,7 +35,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### PRECISE Framework
 
-> **Full methodology**: See `.claude/skills/prompt-expander/SKILL.md` for complete PRECISE framework documentation.
+> **Full methodology**: See `skills/prompt-expander/SKILL.md` for complete PRECISE framework documentation.
 
 Quick mnemonic: **P**ersona, **R**equirements, **E**xamples, **C**ontext, **I**nstructions, **S**pecifications, **E**valuation
 
@@ -44,7 +48,7 @@ Quick mnemonic: **P**ersona, **R**equirements, **E**xamples, **C**ontext, **I**n
 
 ### Supported Platforms
 
-> **Detection rules**: See `.claude/skills/prompt-expander/SKILL.md` for platform detection table.
+> **Detection rules**: See `skills/prompt-expander/SKILL.md` for platform detection table.
 
 Supports: Claude/Claude Code, OpenAI/GPT/Codex, Google Gemini, Image Gen (Midjourney, DALL-E), Video Gen (Sora, Runway, Kling)
 
@@ -59,15 +63,20 @@ Interactive options:
 When extending this plugin:
 
 ### Adding Platform Templates
-Add to `.claude/skills/prompt-expander/templates/[platform].md`:
+Add to `skills/prompt-expander/templates/[platform].md`:
 1. Define platform characteristics (style, constraints, strengths)
 2. Add adaptation guidelines for PRECISE elements
 3. Include example prompts for that platform
 4. Update platform detection in SKILL.md
 
 ### Adding New Commands
-Create in `.claude/commands/` following pattern:
+Create in `commands/` following pattern:
 ```markdown
+---
+description: Brief description
+argument-hint: "[args]"
+---
+
 # /command-name - Brief Description
 
 [What it does]
@@ -75,17 +84,14 @@ Create in `.claude/commands/` following pattern:
 ## Usage
 [Syntax and examples]
 
-## Behavior
-[Step-by-step execution]
-
-## Output
-[Expected output format]
+## Execution
+[Instructions for Claude]
 ```
 
 ### Extending the Agent
 
 The prompt-expander agent should remain a thin orchestrator. When adding features:
-1. Add methodology to `.claude/skills/prompt-expander/SKILL.md`
+1. Add methodology to `skills/prompt-expander/SKILL.md`
 2. Add platform-specific patterns to template files
 3. Keep agent logic minimal (detect platform, invoke skill, return result)
 
@@ -104,7 +110,7 @@ description: VERB description with trigger phrases...
 
 ## Anti-Patterns to Avoid
 
-> **Full list**: See `.claude/skills/prompt-expander/SKILL.md` quality checklist.
+> **Full list**: See `skills/prompt-expander/SKILL.md` quality checklist.
 
 Watch for: vague verbs, missing audience, implicit assumptions, wall of text, conflicting instructions, scope creep, missing format, role ambiguity.
 
@@ -112,11 +118,24 @@ Watch for: vague verbs, missing audience, implicit assumptions, wall of text, co
 
 | Type | Location | Pattern |
 |------|----------|---------|
-| Agent | `.claude/agents/` | `prompt-expander.md` |
-| Command | `.claude/commands/` | `coggle.md` |
-| Skill | `.claude/skills/prompt-expander/` | `SKILL.md` |
-| Templates | `.claude/skills/prompt-expander/templates/` | `[platform].md` |
+| Manifest | `.claude-plugin/` | `plugin.json` |
+| Agent | `agents/` | `prompt-expander.md` |
+| Command | `commands/` | `coggle.md` |
+| Skill | `skills/prompt-expander/` | `SKILL.md` |
+| Templates | `skills/prompt-expander/templates/` | `[platform].md` |
 | Saved Prompts | `.prompts/` | `[name].md` |
-| Project docs | Root | `CLAUDE.md` |
+| Documentation | Root | `README.md`, `CLAUDE.md` |
 
 > **Note**: The `.prompts/` directory is auto-created when first saving a prompt via `/coggle`.
+
+## Testing the Plugin
+
+### Local Development
+```bash
+claude --plugin-dir /path/to/coggle
+```
+
+### Verify Components Load
+1. Run `/coggle test prompt` - command should work
+2. Check agents list - prompt-expander should appear
+3. Verify skill triggers on "expand", "improve prompt", etc.
