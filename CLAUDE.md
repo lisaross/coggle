@@ -10,27 +10,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```
 .claude/
-├── agents/           # Thin orchestrators (invoke skills via Skill tool)
-│   ├── prompt-expander.md    # Orchestrates prompt expansion
-│   ├── prompt-analyzer.md    # Orchestrates prompt analysis
-│   ├── prompt-library.md     # Prompt storage and retrieval
-│   └── prompt-coach.md       # Interactive prompt engineering teacher
-│
-├── commands/         # User-invocable slash commands
-│   ├── coggle.md             # /coggle - Unified prompt enhancement (expand/analyze/template/format/compare)
-│   └── learn-prompting.md    # /learn-prompting - Interactive tutorials
-│
-└── skills/           # Reusable knowledge modules (directory-based)
-    ├── prompt-expander/      # PRECISE expansion methodology
-    │   └── SKILL.md
-    ├── prompt-analyzer/      # 7-dimension quality scoring
-    │   └── SKILL.md
-    ├── prompt-templates/     # Template library (analysis/creation/technical/strategy)
-    │   └── SKILL.md
-    ├── prompt-formatter/     # Export formats (copy/markdown/JSON/slides/email/API)
-    │   └── SKILL.md
-    └── prompt-compare/       # Side-by-side prompt comparison
-        └── SKILL.md
+├── agents/
+│   └── prompt-expander.md    # Expands prompts with platform detection
+├── commands/
+│   └── coggle.md             # /coggle - Main entry point
+└── skills/
+    └── prompt-expander/
+        ├── SKILL.md          # PRECISE methodology + platform adaptation
+        └── templates/        # Platform-specific prompt patterns
+            ├── README.md
+            ├── claude.md
+            ├── codex.md
+            ├── gemini.md
+            ├── image-gen.md
+            └── video-gen.md
 ```
 
 ## Core Concepts
@@ -51,98 +44,38 @@ Quick reference for the expansion methodology (full details in `.claude/skills/p
 | **S**pecifications | Format requirements | "Output as markdown table with headers" |
 | **E**valuation | Success criteria | "Success = actionable within 24 hours" |
 
-### 7-Dimension Quality Scoring
+## Quick Start
 
-Quick reference for scoring (full details in `.claude/skills/prompt-analyzer/SKILL.md`):
+```bash
+/coggle [your prompt]                    # Expand for any platform
+/coggle [prompt] for [platform]          # Expand for specific platform
+```
 
-| Dimension | What It Measures |
-|-----------|------------------|
-| Clarity | Is the intent unambiguous? |
-| Specificity | Are requirements concrete? |
-| Structure | Is there logical organization? |
-| Context | Is background provided? |
-| Actionability | Can AI start immediately? |
-| Completeness | Are all elements present? |
-| Efficiency | Is it concise? |
+### Supported Platforms
+| Platform | Examples |
+|----------|----------|
+| Claude/Claude Code | System prompts, agent instructions |
+| OpenAI/GPT/Codex | ChatGPT prompts, code generation |
+| Google Gemini | Multimodal prompts, reasoning tasks |
+| Image Gen | Midjourney, DALL-E, Nano Banana Pro |
+| Video Gen | Sora, Runway, Kling |
 
-**Overall: X/70** with ratings:
-- **Excellent** (60-70): Production ready
-- **Good** (45-59): Minor tweaks helpful
-- **Fair** (30-44): Significant improvements needed
-- **Poor** (<30): Major rewrite recommended
-
-## Quick Start Commands
-
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `/coggle [prompt]` | Expand a vague prompt (default) | `/coggle Write me something about marketing` |
-| `/coggle analyze [prompt]` | Score prompt quality | `/coggle analyze Help me with code` |
-| `/coggle template [cat] [type]` | Get ready-to-use template | `/coggle template analysis market` |
-| `/coggle format [fmt] [prompt]` | Export in specific format | `/coggle format json last` |
-| `/coggle compare [A] vs [B]` | Compare two prompts | `/coggle compare "v1" vs "v2"` |
-| `/learn-prompting [topic]` | Interactive tutorials | `/learn-prompting basics` |
-
-After expanding, interactive options are presented:
+### After Expansion
+Interactive options:
 - **Run** - Execute the prompt immediately
 - **Save** - Save to `.prompts/[name].md`
-- **Analyze** - Score quality first
-- **Other** - Refine with custom input
-
-## Export Formats
-
-Expanded prompts can be exported as:
-
-| Format | Use Case |
-|--------|----------|
-| `copy` | Plain text for pasting into ChatGPT/Claude |
-| `markdown` | Formatted documentation with headers |
-| `json` | Structured data for storage/APIs |
-| `slides` | Presentation outline for teaching |
-| `email` | Delegation request format |
-| `system` | System prompt for custom GPTs/assistants |
-| `api` | OpenAI/Anthropic API request body |
-
-## Template Categories
-
-| Category | Templates | Use For |
-|----------|-----------|---------|
-| **analysis** | Market, Code Review, Competitive, Risk | Evaluating, reviewing, assessing |
-| **creation** | Blog, Email, Copy, Docs | Generating new content |
-| **technical** | API Design, Schema, Architecture, Debug | Software development |
-| **strategy** | Decision, Roadmap, OKR, Retrospective | Planning and decision-making |
-
-## Agent Triggers
-
-| Agent | Trigger Phrases | Specialty |
-|-------|-----------------|-----------|
-| prompt-expander | "expand", "improve prompt", "coggle" | Transform vague prompts |
-| prompt-analyzer | "analyze", "score", "audit prompt" | Diagnose prompt issues |
-| prompt-compare | "compare prompts", "which is better" | Side-by-side comparison |
-| prompt-coach | "teach me", "how do I prompt" | Learn prompting skills |
-
-All agents are thin orchestrators that delegate to corresponding skills.
+- **Refine** - Iterate with feedback
 
 ## Development Guidelines
 
 When extending this plugin:
 
-### Adding New Templates
-Add to `.claude/skills/prompt-templates/SKILL.md` following existing format:
-```
-### [Template Name] Template
-
-[Template content with [PLACEHOLDERS]]
-
-**Customization Guide:**
-1. Replace [PLACEHOLDER1] with [guidance]
-```
-
-### Adding New Formats
-Add to `.claude/skills/prompt-formatter/SKILL.md`:
-1. Define format name and structure
-2. Add transformation rules
-3. Include usage guidance
-4. Update Format Selection Guide table
+### Adding Platform Templates
+Add to `.claude/skills/prompt-expander/templates/[platform].md`:
+1. Define platform characteristics (style, constraints, strengths)
+2. Add adaptation guidelines for PRECISE elements
+3. Include example prompts for that platform
+4. Update platform detection in SKILL.md
 
 ### Adding New Commands
 Create in `.claude/commands/` following pattern:
@@ -161,30 +94,12 @@ Create in `.claude/commands/` following pattern:
 [Expected output format]
 ```
 
-### Adding New Agents
+### Extending the Agent
 
-Agents should be thin orchestrators that delegate to skills. Create in `.claude/agents/`:
-
-```markdown
-# Agent: agent-name
-
-[Description with trigger phrases and PROACTIVELY/SPECIALIST keywords]
-
-## Tools Available
-
-- Skill (invoke the corresponding skill)
-- [Other tools as needed]
-
-## Execution
-
-1. Use Skill tool to invoke [skill-name] for methodology
-2. Apply methodology to user input
-3. Return result in skill's output format
-
-The skill contains the full methodology, output format, and quality criteria.
-```
-
-**Key principle**: Don't duplicate skill content in agents. Agents orchestrate; skills contain knowledge.
+The prompt-expander agent should remain a thin orchestrator. When adding features:
+1. Add methodology to `.claude/skills/prompt-expander/SKILL.md`
+2. Add platform-specific patterns to template files
+3. Keep agent logic minimal (detect platform, invoke skill, return result)
 
 ### Skill File Structure
 Skills use YAML frontmatter for metadata:
@@ -218,8 +133,9 @@ When expanding prompts, watch for and fix:
 
 | Type | Location | Pattern |
 |------|----------|---------|
-| Agents | `.claude/agents/` | `[name].md` |
-| Commands | `.claude/commands/` | `[command-name].md` |
-| Skills | `.claude/skills/` | `[skill-name]/SKILL.md` |
-| Integrations | `.claude/` | `INTEGRATIONS.md` |
+| Agent | `.claude/agents/` | `prompt-expander.md` |
+| Command | `.claude/commands/` | `coggle.md` |
+| Skill | `.claude/skills/prompt-expander/` | `SKILL.md` |
+| Templates | `.claude/skills/prompt-expander/templates/` | `[platform].md` |
+| Saved Prompts | `.prompts/` | `[name].md` |
 | Project docs | Root | `CLAUDE.md` |
