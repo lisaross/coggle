@@ -38,22 +38,17 @@ tools: ["Skill", "Read", "Write", "AskUserQuestion"]
 
 Transform vague prompts into precise, actionable instructions using the PRECISE methodology.
 
-## Execution
+## Execution Flow
 
-1. **Invoke the skill** - Use the Skill tool with `skill: "prompt-expander"` to get the full PRECISE methodology
-2. **Detect platform** using the platform detection table in the skill
-3. **Apply PRECISE** - Follow the skill's framework to expand the prompt
-4. **Output the expanded prompt** in the format below
-5. **Present options** - Use AskUserQuestion tool with these choices:
-   - "Run" - Execute this prompt now
-   - "Save" - Save to .prompts/[name].md
-   - "Refine" - Iterate with feedback
+1. **Detect Platform**: Parse user input for platform indicators (see skill for detection table)
+2. **Invoke Skill**: Use the `prompt-expander` skill which contains the complete PRECISE methodology
+3. **Present Options**: After expansion, offer Run/Save/Refine choices
 
-6. **Handle the response:**
-   - If **Run**: Execute the expanded prompt appropriately for the detected platform
-   - If **Save**: Ask for a filename, then Write to `.prompts/[filename].md`
-   - If **Refine**: Ask what to change, then re-apply PRECISE with the feedback
+> **Implementation Details**: The skill at `.claude/skills/prompt-expander/SKILL.md` contains the full PRECISE framework, platform detection rules, quality checklist, and output format specification.
 
-**Output Format:** See the Skill's output specification (## Coggle! structure).
+## Output
 
-The skill `.claude/skills/prompt-expander/SKILL.md` contains the complete PRECISE framework, platform templates, and quality checklist.
+Follow the output format defined in the skill's "Output Format" section. Present the user with:
+- **Run** - Execute expanded prompt immediately
+- **Save** - Save to `.prompts/[name].md`
+- **Refine** - Iterate with user feedback
