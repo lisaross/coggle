@@ -4,7 +4,7 @@ Transform vague AI prompts into precise, platform-optimized instructions using t
 
 ## Features
 
-- **Multi-Platform Support**: Optimizes prompts for Claude, GPT/ChatGPT, Gemini, Midjourney, DALL-E, Sora, Runway, and more
+- **Multi-Platform Support**: Optimizes prompts for Claude, GPT, Gemini, Perplexity, GitHub Copilot, Grok, Midjourney, Flux, Sora, and more
 - **PRECISE Framework**: Systematic approach covering Persona, Requirements, Examples, Context, Instructions, Specifications, and Evaluation
 - **Platform Detection**: Automatically detects target platform from context clues
 - **Interactive Workflow**: Run, Save, or Refine expanded prompts
@@ -42,40 +42,44 @@ claude --plugin-dir /path/to/coggle
 ### After Expansion
 
 Choose from:
+
 - **Run** - Execute the expanded prompt immediately
 - **Save** - Save to `.prompts/[name].md` for reuse
 - **Refine** - Iterate with feedback
 
 ## Supported Platforms
 
-| Platform | Triggers | Best For |
-|----------|----------|----------|
-| Claude/Claude Code | "claude", "system prompt" | Complex reasoning, coding |
-| OpenAI/GPT | "gpt", "chatgpt", "openai" | Code generation, chat |
-| Gemini | "gemini", "google ai" | Multimodal, reasoning |
-| Image Gen | "midjourney", "dall-e", "image" | Visual content |
-| Video Gen | "sora", "runway", "video" | Video content |
+| Platform           | Triggers                        | Best For                  |
+| ------------------ | ------------------------------- | ------------------------- |
+| Claude/Claude Code | "claude", "system prompt"       | Complex reasoning, coding |
+| OpenAI/GPT         | "gpt", "chatgpt", "openai"      | Code generation, chat     |
+| Gemini             | "gemini", "google ai"           | Multimodal, reasoning     |
+| Perplexity         | "perplexity", "research"        | Research with citations   |
+| GitHub Copilot     | "copilot", "github"             | Code completion           |
+| Grok               | "grok", "xai"                   | Conversational, real-time |
+| Image Gen          | "midjourney", "dall-e", "image" | Visual content            |
+| Flux               | "flux", "flux.1"                | Photorealistic images     |
+| Video Gen          | "sora", "runway", "video"       | Video content             |
 
 ## The PRECISE Framework
 
 Each prompt is enhanced with:
 
-| Element | Purpose |
-|---------|---------|
-| **P**ersona | Define the AI's role or style |
-| **R**equirements | Specify deliverables |
-| **E**xamples | Provide concrete references |
-| **C**ontext | Add relevant background |
-| **I**nstructions | Break down the task |
-| **S**pecifications | Define format and structure |
-| **E**valuation | Specify success criteria |
+| Element            | Purpose                       |
+| ------------------ | ----------------------------- |
+| **P**ersona        | Define the AI's role or style |
+| **R**equirements   | Specify deliverables          |
+| **E**xamples       | Provide concrete references   |
+| **C**ontext        | Add relevant background       |
+| **I**nstructions   | Break down the task           |
+| **S**pecifications | Define format and structure   |
+| **E**valuation     | Specify success criteria      |
 
 ## Examples
 
-### Before & After
+### Text AI (Claude)
 
-**Text AI (Claude)**
-```
+```text
 Before: "Write something about marketing"
 
 After: "Act as a marketing strategist with 10+ years B2B SaaS experience.
@@ -85,8 +89,9 @@ Hook -> Problem -> Solution -> Examples -> CTA.
 Tone: Professional but approachable."
 ```
 
-**Image AI (Midjourney)**
-```
+### Image AI (Midjourney)
+
+```text
 Before: "sunset over mountains"
 
 After: "Golden hour sunset over snow-capped mountain peaks, dramatic
@@ -97,7 +102,7 @@ cinematic composition, in the style of Ansel Adams, photorealistic,
 
 ## Plugin Structure
 
-```
+```text
 coggle/
 ├── .claude-plugin/
 │   └── plugin.json      # Plugin manifest

@@ -26,7 +26,11 @@ Detect target platform from context clues:
 | "for Claude", "Claude Code", "system prompt" | Claude |
 | "GPT", "ChatGPT", "OpenAI", "Codex" | OpenAI |
 | "Gemini", "Google AI" | Gemini |
+| "Perplexity", "search", "research", "citations" | Perplexity |
+| "Copilot", "GitHub", "code completion" | GitHub Copilot |
+| "Grok", "xAI", "X AI" | Grok |
 | "Midjourney", "MJ", "--ar", "DALL-E", "image" | Image Generation |
+| "Flux", "FLUX.1", "Black Forest" | Flux |
 | "Sora", "Runway", "video", "animation" | Video Generation |
 | "Nano Banana", "Higgsfield" | Nano Banana Pro |
 
@@ -103,7 +107,11 @@ Reference platform-specific patterns from `./templates/[platform].md`:
 | Claude | Complex reasoning, coding | Role + Context + Task + Constraints | `claude.md` |
 | Codex/GPT | Code generation, chat | Delimiters + Examples | `codex.md` |
 | Gemini | Multimodal, reasoning | Few-shot examples | `gemini.md` |
-| Image Gen | Midjourney, DALL-E, Nano Banana | Descriptive phrases + Parameters | `image-gen.md` |
+| Perplexity | Research, citations | Search scope + Recency + Sources | `perplexity.md` |
+| Copilot | Code completion | General goal + Specific requirements | `copilot.md` |
+| Grok | Conversational, real-time | Role + Task + Format | `grok.md` |
+| Image Gen | Midjourney, DALL-E | Descriptive phrases + Parameters | `image-gen.md` |
+| Flux | Photorealistic images | Natural language descriptions | `flux.md` |
 | Video Gen | Sora, Runway, Kling | Storyboard + Camera direction | `video-gen.md` |
 
 When expanding a prompt, detect the target platform and apply the appropriate template structure.
@@ -188,6 +196,36 @@ through rain-soaked Tokyo streets at night, neon reflections on wet
 pavement, bokeh lights in background, film noir aesthetic, slow motion,
 camera dollies forward maintaining subject in center frame,
 4K resolution, 24fps, 10 seconds duration"
+```
+
+**Research AI (Perplexity):**
+```
+Before: "tell me about quantum computing"
+After: "What are the latest breakthroughs in quantum error correction?
+Focus on peer-reviewed research from 2024-2025.
+Summarize the top 3 developments with inline citations.
+Include practical implications for each breakthrough."
+```
+
+**Code AI (GitHub Copilot):**
+```
+Before: "make a retry function"
+After: "Write a TypeScript function that retries async operations with
+exponential backoff.
+Requirements:
+- Accept a function, max retries (default 3), initial delay (default 1000ms)
+- Double delay after each retry
+- Return successful result or throw after max retries
+- Log each attempt with attempt number"
+```
+
+**Conversational AI (Grok):**
+```
+Before: "analyze this startup"
+After: "Role: Skeptical tech analyst who's seen too many hype cycles
+Task: Evaluate the claims in this startup pitch
+Format: Bullet points with a reality-check score (1-10) for each claim
+Be direct, flag red flags, and rate overall viability."
 ```
 
 ---
