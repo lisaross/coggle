@@ -96,14 +96,17 @@ Specify success criteria:
 
 ### Step 3: Apply Platform Template
 
-Reference platform-specific patterns from: `./templates/[platform].md`
+Reference platform-specific patterns from `./templates/[platform].md`:
 
-Templates available:
-- `./templates/claude.md` - Claude-specific patterns
-- `./templates/gpt.md` - OpenAI patterns
-- `./templates/image-generation.md` - Midjourney, DALL-E
-- `./templates/video-generation.md` - Sora, Runway
-- (More templates as they're added)
+| Platform | Best For | Key Pattern | Template File |
+|----------|----------|-------------|---------------|
+| Claude | Complex reasoning, coding | Role + Context + Task + Constraints | `claude.md` |
+| Codex/GPT | Code generation, chat | Delimiters + Examples | `codex.md` |
+| Gemini | Multimodal, reasoning | Few-shot examples | `gemini.md` |
+| Image Gen | Midjourney, DALL-E, Nano Banana | Descriptive phrases + Parameters | `image-gen.md` |
+| Video Gen | Sora, Runway, Kling | Storyboard + Camera direction | `video-gen.md` |
+
+When expanding a prompt, detect the target platform and apply the appropriate template structure.
 
 ### Step 4: Present Options
 
