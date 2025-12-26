@@ -17,10 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 │   └── prompt-coach.md       # Interactive prompt engineering teacher
 │
 ├── commands/         # User-invocable slash commands
-│   ├── coggle.md             # /coggle - Quick prompt expansion
-│   ├── analyze-prompt.md     # /analyze-prompt - Quality diagnosis
-│   ├── template.md           # /template - Get ready-to-use templates
-│   ├── format-prompt.md      # /format-prompt - Export formats
+│   ├── coggle.md             # /coggle - Unified prompt enhancement (expand/analyze/template/format/compare)
 │   └── learn-prompting.md    # /learn-prompting - Interactive tutorials
 │
 └── skills/           # Reusable knowledge modules (directory-based)
@@ -78,11 +75,18 @@ Quick reference for scoring (full details in `.claude/skills/prompt-analyzer/SKI
 
 | Command | Purpose | Example |
 |---------|---------|---------|
-| `/coggle [prompt]` | Instantly expand a vague prompt | `/coggle Write me something about marketing` |
-| `/analyze-prompt [prompt]` | Get quality score and issues | `/analyze-prompt Help me with code` |
-| `/template [category] [type]` | Get a ready-to-use template | `/template analysis market` |
-| `/format-prompt [format]` | Export prompt in different format | `/format-prompt json last` |
-| `/learn-prompting [topic]` | Interactive prompt engineering lesson | `/learn-prompting basics` |
+| `/coggle [prompt]` | Expand a vague prompt (default) | `/coggle Write me something about marketing` |
+| `/coggle analyze [prompt]` | Score prompt quality | `/coggle analyze Help me with code` |
+| `/coggle template [cat] [type]` | Get ready-to-use template | `/coggle template analysis market` |
+| `/coggle format [fmt] [prompt]` | Export in specific format | `/coggle format json last` |
+| `/coggle compare [A] vs [B]` | Compare two prompts | `/coggle compare "v1" vs "v2"` |
+| `/learn-prompting [topic]` | Interactive tutorials | `/learn-prompting basics` |
+
+After expanding, interactive options are presented:
+- **Run** - Execute the prompt immediately
+- **Save** - Save to `.prompts/[name].md`
+- **Analyze** - Score quality first
+- **Other** - Refine with custom input
 
 ## Export Formats
 
@@ -111,10 +115,12 @@ Expanded prompts can be exported as:
 
 | Agent | Trigger Phrases | Specialty |
 |-------|-----------------|-----------|
-| prompt-expander | "expand", "improve prompt", "coggle", "make better" | Transform vague prompts |
-| prompt-analyzer | "analyze", "what's wrong", "audit", "review prompt" | Diagnose prompt issues |
-| prompt-library | "save prompt", "find prompt", "my prompts" | Store and retrieve prompts |
-| prompt-coach | "teach me", "how do I prompt", "prompt tips" | Learn prompting skills |
+| prompt-expander | "expand", "improve prompt", "coggle" | Transform vague prompts |
+| prompt-analyzer | "analyze", "score", "audit prompt" | Diagnose prompt issues |
+| prompt-compare | "compare prompts", "which is better" | Side-by-side comparison |
+| prompt-coach | "teach me", "how do I prompt" | Learn prompting skills |
+
+All agents are thin orchestrators that delegate to corresponding skills.
 
 ## Development Guidelines
 
@@ -215,4 +221,5 @@ When expanding prompts, watch for and fix:
 | Agents | `.claude/agents/` | `[name].md` |
 | Commands | `.claude/commands/` | `[command-name].md` |
 | Skills | `.claude/skills/` | `[skill-name]/SKILL.md` |
+| Integrations | `.claude/` | `INTEGRATIONS.md` |
 | Project docs | Root | `CLAUDE.md` |
