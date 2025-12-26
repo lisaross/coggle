@@ -41,7 +41,7 @@ Transform vague prompts into precise, actionable instructions using the PRECISE 
 ## Execution
 
 1. **Invoke the skill** - Use the Skill tool with `skill: "prompt-expander"` to get the full PRECISE methodology
-2. **Detect platform** - Look for platform clues in the prompt (midjourney, claude, chatgpt, etc.)
+2. **Detect platform** using the platform detection table in the skill
 3. **Apply PRECISE** - Follow the skill's framework to expand the prompt
 4. **Output the expanded prompt** in the format below
 5. **Present options** - Use AskUserQuestion tool with these choices:
