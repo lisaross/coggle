@@ -1,187 +1,192 @@
 ---
 name: prompt-expander
-description: EXPAND vague or unclear prompts into precise, actionable instructions using PRECISE methodology. Use when user provides raw prompt needing improvement, wants to optimize AI interactions, or requests prompt enhancement. Triggers on "expand prompt", "improve prompt", "optimize prompt", "enhance prompt", "make this prompt better", "coggle".
+description: EXPAND vague prompts into precise, platform-optimized instructions. Detects target platform (Claude, GPT, Gemini, Midjourney, Sora, etc.) and applies appropriate prompting patterns. Use when user says "coggle", "expand", "improve prompt", "make better".
 ---
 
 # Prompt Expander
 
-Transform vague or unclear prompts into precise, actionable instructions using proven best practices. This skill applies the PRECISE methodology to systematically improve prompt quality and effectiveness.
+Transform vague prompts into precise, platform-optimized instructions.
 
 ## Trigger Phrases
 
 Users invoke this skill by saying:
-- "expand prompt"
+- "coggle"
+- "expand"
 - "improve prompt"
+- "make better"
 - "optimize prompt"
 - "enhance prompt"
-- "make this prompt better"
-- "coggle"
 
-## When to Use This Skill
+## Platform Detection
 
-Use this skill when:
-- User provides a raw prompt that needs improvement
-- The prompt is vague, incomplete, or lacks structure
-- User wants to optimize their AI interactions
-- A prompt needs to be more actionable or specific
+Detect target platform from context clues:
 
-## Core Principles
+| Clue | Platform |
+|------|----------|
+| "for Claude", "Claude Code", "system prompt" | Claude |
+| "GPT", "ChatGPT", "OpenAI", "Codex" | OpenAI |
+| "Gemini", "Google AI" | Gemini |
+| "Midjourney", "MJ", "--ar", "DALL-E", "image" | Image Generation |
+| "Sora", "Runway", "video", "animation" | Video Generation |
+| "Nano Banana", "Higgsfield" | Nano Banana Pro |
 
-1. **PRECISE Methodology**: Apply systematic framework covering Persona, Requirements, Examples, Context, Instructions, Specifications, and Evaluation
-2. **Progressive Enhancement**: Transform incrementally, focusing on highest-impact improvements first
-3. **Actionable Output**: Every expanded prompt should be immediately usable
+**If unclear, ask user:** "What platform is this prompt for?"
 
-## Workflow
+## Expansion Workflow
 
-### Step 1: Analyze Input
+### Step 1: Detect Platform
 
-**Actions:**
-- Read the user's original prompt
-- Identify what's missing (role, context, structure, examples, etc.)
-- Determine the prompt's intent and desired outcome
-
-**What to expect:**
-- Input may be a single sentence or vague request
-- May lack context, structure, or specific requirements
+Identify target from prompt context or ask user.
 
 ### Step 2: Apply PRECISE Framework
 
-Apply these transformations in order:
+Adapt elements based on platform:
+
+| Element | Text AI | Image AI | Video AI |
+|---------|---------|----------|----------|
+| **P**ersona | Role definition | Style/artist reference | Director's vision |
+| **R**equirements | Deliverables | Visual elements | Shots/scenes |
+| **E**xamples | Reference outputs | Reference images | Reference clips |
+| **C**ontext | Background info | Scene setting | Narrative context |
+| **I**nstructions | Step-by-step | Composition notes | Storyboard |
+| **S**pecifications | Output format | Parameters (--ar, --v) | Duration, resolution |
+| **E**valuation | Success criteria | Visual quality checks | Motion coherence |
 
 #### P - Persona
-Define a specific role or expert identity for the AI to adopt.
-- Add: "Act as a [specific expert role] with [relevant experience]..."
+Define the AI's role or style:
+- **Text AI**: "Act as a [specific expert role] with [relevant experience]..."
+- **Image AI**: "In the style of [artist/movement]..."
+- **Video AI**: "Directed as [cinematic style/vision]..."
 
 #### R - Requirements
-Clarify the specific deliverables and constraints.
-- Specify output format, length, style, and technical requirements
-- Define what success looks like
+Specify deliverables:
+- **Text AI**: Output format, length, style, technical requirements
+- **Image AI**: Visual elements, composition, mood
+- **Video AI**: Shot list, scene requirements, key moments
 
 #### E - Examples
-Provide concrete examples or references.
-- Include sample outputs, style references, or exemplars
-- Show don't just tell
+Provide concrete references:
+- **Text AI**: Sample outputs, style guides
+- **Image AI**: Reference images, similar works
+- **Video AI**: Reference clips, similar scenes
 
 #### C - Context
-Add relevant background information.
-- Industry, audience, purpose, constraints
-- Any assumptions that should be made explicit
+Add relevant background:
+- **Text AI**: Industry, audience, purpose, constraints
+- **Image AI**: Scene setting, environment, atmosphere
+- **Video AI**: Narrative context, story arc, setting
 
 #### I - Instructions
-Break down the task into clear, numbered steps.
-- Sequence the work logically
-- Make each step actionable
+Break down the task:
+- **Text AI**: Numbered steps, logical sequence
+- **Image AI**: Composition notes, layer priorities
+- **Video AI**: Storyboard sequence, shot progression
 
 #### S - Specifications
-Define the technical format and structure.
-- Output format (markdown, JSON, list, table)
-- Structure requirements (sections, headings, bullets)
+Define format and structure:
+- **Text AI**: markdown/JSON/list/table, length, sections
+- **Image AI**: Aspect ratio (--ar 16:9), version (--v 6), quality (--q 2)
+- **Video AI**: Duration, resolution, frame rate, transitions
 
-#### E - Evaluation Criteria
-Specify how quality will be measured.
-- Success metrics
-- What to avoid
+#### E - Evaluation
+Specify success criteria:
+- **Text AI**: Quality metrics, what to avoid
+- **Image AI**: Visual coherence, style consistency
+- **Video AI**: Motion smoothness, narrative flow
 
-### Step 3: Generate Expanded Prompt
+### Step 3: Apply Platform Template
 
-**Format the output as:**
+Reference platform-specific patterns from: `./templates/[platform].md`
+
+Templates available:
+- `./templates/claude.md` - Claude-specific patterns
+- `./templates/gpt.md` - OpenAI patterns
+- `./templates/image-generation.md` - Midjourney, DALL-E
+- `./templates/video-generation.md` - Sora, Runway
+- (More templates as they're added)
+
+### Step 4: Present Options
+
+After expansion, offer:
+- **Run** - Execute the prompt (if possible)
+- **Save** - Save to `.prompts/[name].md`
+- **Refine** - Iterate with user feedback
+
+## Output Format
 
 ```markdown
-## Expanded Prompt
+## Coggle!
 
-**Original Prompt:**
-> [User's original prompt]
+**Original:**
+> [input]
 
-**Expanded Version:**
+**Platform:** [detected platform]
 
----
+**Expanded:**
 
-[Persona] Act as a [specific role] with expertise in [domain].
-
-[Context] You are helping [audience] with [purpose]. The context is [background].
-
-[Instructions] Complete the following steps:
-1. [First step]
-2. [Second step]
-3. [Third step]
-
-[Requirements]
-- Output should be [format/length/style]
-- Include [specific elements]
-- Avoid [things to exclude]
-
-[Examples] For reference:
-- [Example or style guide]
-
-[Specifications]
-- Format: [markdown/JSON/list/table]
-- Structure: [headings/bullets/numbered]
-- Length: [approximate word count or sections]
+[Full expanded prompt in platform-appropriate format]
 
 ---
 
-**Why This Works:**
-- [Brief explanation of key improvements made]
+**Templates:** See `./templates/` for platform-specific patterns.
+
+**Next Steps:**
+- **Run** - Execute this prompt
+- **Save** - Save to `.prompts/[name].md`
+- **Refine** - Make adjustments
 ```
 
-### Step 4: Explain Improvements
+## Common Anti-Patterns to Avoid
 
-**Actions:**
-- Highlight the 2-3 most impactful changes
-- Explain why these improvements matter
-- Show how they make the prompt more effective
-
-## Quick Expansion Mode
-
-For faster expansions when user needs speed over depth, focus on the top 3 transformations:
-
-1. **Add Role** - Who should the AI be?
-2. **Add Structure** - What format/steps?
-3. **Add Specificity** - What exactly is needed?
-
-## Export Options
-
-After expansion, offer to format the result as:
-- **Copy-ready** - Plain text for pasting
-- **Markdown** - Formatted with headers
-- **JSON** - Structured data format
-- **Slide Outline** - For presentations
-- **Email Draft** - Professional email format
+| Anti-Pattern | Example | Fix |
+|--------------|---------|-----|
+| Vague verbs | "help", "something", "stuff" | Specific actions |
+| Missing audience | No target reader defined | Add audience context |
+| Implicit assumptions | Unstated requirements | Make explicit |
+| Wall of text | No structure | Add sections/steps |
+| Conflicting instructions | Contradictory asks | Resolve conflicts |
+| Missing format | No output spec | Define structure |
 
 ## Success Indicators
 
 This skill is successful when:
-- [ ] Original prompt has been analyzed for gaps
-- [ ] PRECISE framework elements have been applied where appropriate
+- [ ] Platform has been detected or confirmed
+- [ ] PRECISE framework elements applied appropriately for platform
 - [ ] Expanded prompt is significantly more actionable than original
-- [ ] Output includes both the expanded prompt and explanation of improvements
-- [ ] User can immediately copy and use the expanded version
+- [ ] Output follows platform-specific conventions
+- [ ] User can immediately use the expanded version
 
-## Quality Checklist
+## Quick Examples
 
-Before marking complete, verify:
-- [ ] Persona/role is specific and relevant
-- [ ] Instructions are numbered and actionable
-- [ ] Requirements are explicit and measurable
-- [ ] Format/structure is clearly specified
-- [ ] Output shows both original and expanded versions
-- [ ] Explanation highlights key improvements
+**Text AI (Claude):**
+```
+Before: "Write something about marketing"
+After: "Act as a marketing strategist with 10+ years B2B SaaS experience.
+Write a 500-word blog post about email marketing best practices for
+startup founders. Include 3 actionable tips with examples. Format as:
+Hook -> Problem -> Solution -> Examples -> CTA.
+Tone: Professional but approachable."
+```
 
-## Common Patterns
+**Image AI (Midjourney):**
+```
+Before: "sunset over mountains"
+After: "Golden hour sunset over snow-capped mountain peaks, dramatic
+god rays through clouds, alpine lake reflection in foreground,
+cinematic composition, in the style of Ansel Adams, photorealistic,
+--ar 16:9 --v 6 --q 2"
+```
 
-**Before:** "Write something about marketing"
-**After:** "Act as a marketing strategist with 10+ years B2B SaaS experience. Write a 500-word blog post about email marketing best practices for startup founders. Include 3 actionable tips with examples. Format as: Hook -> Problem -> Solution -> Examples -> CTA. Tone: Professional but approachable."
-
-**Before:** "Help me with code"
-**After:** "Act as a senior Python developer. Review the following Flask API code for security vulnerabilities, performance issues, and PEP 8 compliance. For each issue found, provide: (1) Severity level, (2) Line number, (3) Description, (4) Recommended fix with code snippet. Format as markdown table."
-
-## Integration Points
-
-**Works with:**
-- `prompt-analyzer` - Analyze before expanding to target specific weaknesses
-- `prompt-formatter` - Format the expanded prompt for different use cases
-- `prompt-compare` - Compare original vs expanded to show improvements
+**Video AI (Sora):**
+```
+Before: "person walking in city"
+After: "Cinematic tracking shot following a silhouetted figure walking
+through rain-soaked Tokyo streets at night, neon reflections on wet
+pavement, bokeh lights in background, film noir aesthetic, slow motion,
+camera dollies forward maintaining subject in center frame,
+4K resolution, 24fps, 10 seconds duration"
+```
 
 ---
 
-*Prompt Expander skill | Created: 2025-12-26*
+*Prompt Expander skill | Last Updated: 2025-12-26*
