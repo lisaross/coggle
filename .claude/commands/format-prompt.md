@@ -8,7 +8,7 @@ Convert a prompt to various output formats for different use cases.
 /format-prompt [format] [prompt or "last"]
 ```
 
-## Formats
+## Available Formats
 
 - `copy` - Plain text for pasting
 - `markdown` - Formatted with headers
@@ -24,72 +24,24 @@ Convert a prompt to various output formats for different use cases.
 /format-prompt json [paste prompt here]
 /format-prompt slides last
 /format-prompt api last --provider=anthropic
+/format-prompt markdown last
+/format-prompt system last
 ```
 
 ## Behavior
 
 1. Takes a prompt (or uses last expanded prompt)
-2. Converts to requested format
+2. Converts to requested format via prompt-formatter skill
 3. Outputs ready-to-use result
-4. Copies to clipboard if possible
+4. Provides usage instructions for the format
 
 ## Execution
 
 When invoked:
 
-1. Parse format type from input
-2. Get prompt content (provided or last expanded)
-3. Invoke the prompt-formatter skill
-4. Apply format transformation
-5. Present formatted output
-6. Offer clipboard copy
+1. Parse format type from user input
+2. Get prompt content (provided or "last" expanded)
+3. Invoke prompt-formatter skill with format specification
+4. Present formatted output with usage guidance
 
-## Output Examples
-
-### Copy Format
-```
-[Clean plain text with no formatting marks]
-```
-
-### JSON Format
-```json
-{
-  "prompt": {
-    "persona": "...",
-    "context": "...",
-    "instructions": [...],
-    "requirements": {...}
-  }
-}
-```
-
-### Slides Format
-```
-SLIDE 1: Title
-- Purpose
-- Outcome
-
-SLIDE 2: The Setup
-...
-```
-
-### API Format
-```json
-{
-  "model": "claude-3-opus-20240229",
-  "system": "...",
-  "messages": [...]
-}
-```
-
-## Use Case Guide
-
-| Scenario | Format |
-|----------|--------|
-| Pasting into ChatGPT | `copy` |
-| Saving to docs | `markdown` |
-| Storing in database | `json` |
-| Teaching/presenting | `slides` |
-| Delegating to colleague | `email` |
-| Building custom GPT | `system` |
-| Calling LLM API | `api` |
+**Note:** For detailed format specifications, transformation rules, and use case guidance, the agent invokes the prompt-formatter skill which contains the complete formatting methodology.
