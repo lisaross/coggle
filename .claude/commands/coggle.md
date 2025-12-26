@@ -34,7 +34,7 @@ Unified command for expanding, analyzing, formatting, and comparing prompts.
 
 When invoked with just a prompt:
 
-**Step 1: Expand the Prompt**
+#### Step 1: Expand the Prompt
 
 Use Task tool to invoke prompt-expander agent:
 
@@ -53,7 +53,7 @@ Task:
     Research domain context with Exa/Ref if the prompt involves specific technologies.
 ```
 
-**Step 2: Present Interactive Options**
+#### Step 2: Present Interactive Options
 
 After expansion, use AskUserQuestion to offer:
 
@@ -67,7 +67,7 @@ AskUserQuestion:
     - "Other - [free-text for refinement]"
 ```
 
-**Step 3: Handle User Choice**
+#### Step 3: Handle User Choice
 
 - **If "Run"**: Use Task tool to spawn appropriate agent to execute the expanded prompt
 - **If "Save"**: Ask for filename, then Write to `.prompts/[name].md`
