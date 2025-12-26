@@ -96,15 +96,19 @@ Check for presence of key prompt elements:
 
 ### Step 4: Quality Scoring
 
-Score both prompts using the 7 dimensions from prompt-analyzer:
+Score both prompts using the 7-dimension framework from the `prompt-analyzer` skill:
 
-1. Clarity (1-10)
-2. Specificity (1-10)
-3. Structure (1-10)
-4. Context (1-10)
-5. Actionability (1-10)
-6. Completeness (1-10)
-7. Efficiency (1-10)
+| Dimension | What It Measures |
+|-----------|------------------|
+| Clarity | Is the intent unambiguous? |
+| Specificity | Are requirements concrete? |
+| Structure | Is there logical organization? |
+| Context | Is background provided? |
+| Actionability | Can AI start immediately? |
+| Completeness | Are all elements present? |
+| Efficiency | Is it concise? |
+
+→ See `.claude/skills/prompt-analyzer/SKILL.md` for detailed scoring guidelines.
 
 **Output format:**
 ```markdown
