@@ -12,7 +12,7 @@
       "name": "coggle",
       "description": "Transform vague AI prompts into precise, platform-optimized instructions using the PRECISE methodology",
       "version": "1.0.0",
-      "source": ".",
+      "source": "./",
       "author": {
         "name": "Lisa Ross",
         "email": "lisa@makably.com"
