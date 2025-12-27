@@ -1,14 +1,24 @@
 {
-  "name": "coggle-marketplace",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "coggle",
   "version": "1.0.0",
   "description": "Prompt enhancement plugins for Claude Code",
+  "owner": {
+    "name": "Lisa Ross",
+    "email": "lisa@makably.com"
+  },
   "plugins": [
     {
-      "id": "coggle",
-      "name": "Coggle",
+      "name": "coggle",
       "description": "Transform vague AI prompts into precise, platform-optimized instructions using the PRECISE methodology",
       "version": "1.0.0",
-      "path": ".",
+      "source": ".",
+      "author": {
+        "name": "Lisa Ross",
+        "email": "lisa@makably.com"
+      },
+      "category": "productivity",
+      "homepage": "https://github.com/lisaross/coggle",
       "keywords": [
         "prompt-engineering",
         "prompt-expansion",
