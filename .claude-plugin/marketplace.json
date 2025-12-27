@@ -1,0 +1,24 @@
+{
+  "name": "coggle-marketplace",
+  "version": "1.0.0",
+  "description": "Prompt enhancement plugins for Claude Code",
+  "plugins": [
+    {
+      "id": "coggle",
+      "name": "Coggle",
+      "description": "Transform vague AI prompts into precise, platform-optimized instructions using the PRECISE methodology",
+      "version": "1.0.0",
+      "path": ".",
+      "keywords": [
+        "prompt-engineering",
+        "prompt-expansion",
+        "ai-prompts",
+        "midjourney",
+        "chatgpt",
+        "claude",
+        "gemini",
+        "productivity"
+      ]
+    }
+  ]
+}
